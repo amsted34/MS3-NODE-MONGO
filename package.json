@@ -1,0 +1,36 @@
+{
+  "name": "ms3-node-mongo",
+  "version": "1.0.0",
+  "description": "structure the MS3 jobs inside MongoDB and display in website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amsted34/MS3-NODE-MONGO.git"
+  },
+  "keywords": [
+    "MS3",
+    "Mongo",
+    "NodeJs",
+    "JSX",
+    "DISCOVERY",
+    "LAKEIMAGE",
+    "AMINE",
+    "SEDDIKI"
+  ],
+  "author": "Amine Seddiki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amsted34/MS3-NODE-MONGO/issues"
+  },
+  "homepage": "https://github.com/amsted34/MS3-NODE-MONGO#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.17",
+    "path": "^0.12.7"
+  }
+}
