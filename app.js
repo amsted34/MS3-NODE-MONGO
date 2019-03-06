@@ -8,7 +8,7 @@ var MYDATA = require('./models/data');
 var URI = require('./constants/URI');
 
 //Mongo connction with mongoose - URI is the mongodb connection either mongodb://localhost:27017 or online cluster see your mongodb settings
-mongoose.connect(URI, { useNewUrlParser: true }, (err, res) => {
+mongoose.connect(URI, { useNewUrlParser: true }, (err, res, next) => {
   if (err) {
     console.log(err);
   }
@@ -33,6 +33,7 @@ let app = express();
 
 // bring in Models
 let Data = require('./models/data');
+let modeGroup = [];
 
 //Data.collection.collectionName = 'DATA';
 //Data.collection.name = 'DATA';
