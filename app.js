@@ -3,12 +3,11 @@ let path = require('path');
 let mongoose = require('mongoose');
 let bodyParser = require('body-parser');
 var api = require('./routes/api.js');
+var jobs = require('./routes/jobs.js');
 var MYDATA = require('./models/data');
 var URI = require('./constants/constant');
-//mongoose.connect('mongodb://127.0.0.1:27017/MS3LiveDataDB', {
-// useNewUrlParser: true
-//});
 
+//Mongo connction with mongoose - URI is the mongodb connection either mongodb://localhost:27017 or online cluster see your mongodb settings
 mongoose.connect(URI, { useNewUrlParser: true }, (err, res) => {
   if (err) {
     console.log(err);
@@ -17,7 +16,6 @@ mongoose.connect(URI, { useNewUrlParser: true }, (err, res) => {
   console.log(`On host: ${res.host}`);
 });
 
-console.log(URI);
 let db = mongoose.connection;
 
 //db error
@@ -33,7 +31,7 @@ db.once('open', () => {
 //initialise express
 let app = express();
 
-// bring in Model
+// bring in Models
 let Data = require('./models/data');
 
 //Data.collection.collectionName = 'DATA';
@@ -53,46 +51,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//some application states
-let states = {
-  errors: null,
-  info: null
-};
-
+//routes -- go to routes Folder for details
 app.use('/api', api);
-
-app.get('/', (req, res) => {
-  var myModename = req.params.mode;
-  var myData = '';
-  Data.aggregate([{ $group: { _id: '$modeName' } }], (e, d) => {
-    var myD = d;
-    if (e) {
-      res.json(e);
-    }
-    console.log(myD);
-
-    res.render('index', { data: myD });
-  });
-});
-
-app.get('/:mode', (req, res) => {
-  var myModename = req.params.mode;
-  var myData = '';
-  Data.aggregate(
-    [{ $match: { modeName: myModename } }, { $group: { _id: '$jobName' } }],
-    (e, d) => {
-      var myD = d;
-      if (e) {
-        res.json(e);
-      }
-      console.log(myD);
-
-      res.render('home', { data: myD, mode: myModename });
-    }
-  );
-});
-
-//routes
+app.use('/', jobs);
 
 // launch server .... listening on port 3000
 app.listen(3000, () => {
