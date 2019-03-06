@@ -5,7 +5,7 @@ let bodyParser = require('body-parser');
 var api = require('./routes/api.js');
 var jobs = require('./routes/jobs.js');
 var MYDATA = require('./models/data');
-var URI = require('./constants/constant');
+var URI = require('./constants/URI');
 
 //Mongo connction with mongoose - URI is the mongodb connection either mongodb://localhost:27017 or online cluster see your mongodb settings
 mongoose.connect(URI, { useNewUrlParser: true }, (err, res) => {
